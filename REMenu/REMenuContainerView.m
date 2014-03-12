@@ -34,16 +34,17 @@
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     
     CGFloat landscapeOffset = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? 32.0 : 44.0;
+    CGFloat statusBarOffset = [UIApplication sharedApplication].statusBarHidden ? -20.0 : 0.0;
     
     if (self.navigationBar && !self.appearsBehindNavigationBar) {
         CGRect frame = self.frame;
-        frame.origin.y = self.navigationBar.frame.origin.y + (UIDeviceOrientationIsPortrait(orientation) ? 44.0 : landscapeOffset);
+        frame.origin.y = self.navigationBar.frame.origin.y + (UIDeviceOrientationIsPortrait(orientation) ? 44.0 : landscapeOffset) + statusBarOffset;
         self.frame = frame;
     }
     
     if (self.appearsBehindNavigationBar) {
         CGRect frame = self.frame;
-        frame.origin.y = (UIDeviceOrientationIsPortrait(orientation) ? 44.0 : landscapeOffset) - 44;
+        frame.origin.y = (UIDeviceOrientationIsPortrait(orientation) ? 44.0 : landscapeOffset) - 44.0 + statusBarOffset;
         self.frame = frame;
     }
 }
